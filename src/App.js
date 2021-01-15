@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 
 import { Route } from "react-router-dom";
@@ -7,16 +7,29 @@ import Profile from './Profile'
 import { Component } from 'react';
 
 import Nav from "./Nav";
+import Auth from './Auth/Auth';
+import Callback from './Callback';
 
 class App extends Component {
+
+
+  constructor(props) {
+    super(props)
+    this.auth = new Auth(this.props.history)
+  }
 
   render() {
     return (
       <>
         <Nav />
         <div className="body">
-          <Route path='/' exact component={Home}></Route>
+          <Route path='/' exact render={ props => <Home auth={this.auth} {...props} /> }>
+          </Route>
+
           <Route path='/profile' component={Profile}></Route>
+
+          <Route path='/callback' render={ props => <Callback auth={this.auth} {...props} /> }>
+          </Route>
         </div>
         
       </>
