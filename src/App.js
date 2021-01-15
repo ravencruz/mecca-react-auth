@@ -6,11 +6,14 @@ import Home from './Home'
 import Profile from './Profile'
 import { Component } from 'react';
 
+import Nav from "./Nav";
+
 class App extends Component {
 
   render() {
     return (
       <>
+        <Nav></Nav>
         <Route path='/' exact component={Home}></Route>
         <Route path='/profile' component={Profile}></Route>
       </>
