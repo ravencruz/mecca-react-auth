@@ -59,7 +59,7 @@ export default class Auth {
 
         this.auth0.logout({
             clientID: process.env.REACT_APP_AUTH0_CLIENTE_ID,
-            returnTo: 'http://localhost:3000'
+            returnTo: process.env.REACT_APP_AUTH0_CALLBACK_URL
         })
 
         // this.history.push("/")
