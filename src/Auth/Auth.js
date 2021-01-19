@@ -61,8 +61,6 @@ export default class Auth {
             clientID: process.env.REACT_APP_AUTH0_CLIENTE_ID,
             returnTo: process.env.REACT_APP_URL
         })
-
-        // this.history.push("/")
     }
 
     getAccessToken() {

@@ -20,6 +20,10 @@ class Nav extends Component {
                             {isAuthenticated() ? "Log Out" : "Log In"}
                         </button>
                     </li>
+
+                    <li> 
+                        <Link to="/public">Public</Link>
+                    </li>
                 </ul>
             </nav>
             
