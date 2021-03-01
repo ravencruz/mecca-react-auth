@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 
-class Public extends Component {
+class Private extends Component {
 
     state = {
         message: ""
     }
 
     componentDidMount() {
-        fetch('/public')
+
+        console.log('accessToken', this.props.auth.getAccessToken())
+
+        fetch('/private', {
+            headers: {
+                Authorization: `Bearer ${this.props.auth.getAccessToken()}`
+            }
+        })
         .then(response => {
-            console.log('public', response)
+            console.log('private', response)
             if (response.ok) return response.json();
             throw new Error('Network response was not ok.')
 
@@ -34,4 +41,4 @@ class Public extends Component {
     }
 }
 
-export default Public;
+export default Private;
