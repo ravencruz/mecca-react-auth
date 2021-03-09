@@ -4,6 +4,7 @@ require('dotenv').config()
 const jwt = require("express-jwt")  // Validate JWT and set req.user
 const jwksRsa = require("jwks-rsa") // retrieve RSA keys from a JSON Web Key set (JWKS) endpoint
 
+const checkScope = require('express-jwt-authz'); //validate jst scopes
 
 const checkJwt = jwt({
 
@@ -30,7 +31,7 @@ app.get('/public', function(req, res) {
         message: "Hello from a public API"
     })
 
-    // return res
+
 } )
 
 
@@ -40,9 +41,18 @@ app.get('/private', checkJwt, function(req, res) {
         message: "Hello from a PRIVATE API"
     })
 
-    // return res
 } )
 
+
+app.get('/course', checkJwt, checkScope(["read:courses"]) ,function(req, res) {
+    console.log('request', req)
+    res.json({
+        courses: [
+            {id: 1, title: "Building app with react"},
+            {id: 2, title: "Rehusable Components"}
+        ]
+    })
+} )
 
 app.listen(3001)
 // console.log("Api server listening on " + process.env.REACT_APP_AUTH0_AUDIENCE)
